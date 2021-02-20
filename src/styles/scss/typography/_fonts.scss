@@ -1,0 +1,65 @@
+@import "../constants/colors";
+
+@font-face {
+    font-family: "NotoSans300";
+    src: url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap");
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "NotoSans400";
+    src: url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "NotoSans500";
+    src: url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: "NotoSans700";
+    src: url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap");
+    font-weight: 700;
+}
+
+html {
+    font-size: 16px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.noto300 {
+    font-family: NotoSans300, sans-serif;
+    font-size: 0.9375rem;
+    line-height: 1.75rem;
+    color: $text-primary;
+}
+
+.noto400 {
+    font-family: NotoSans400, sans-serif;
+    font-size: 0.9375rem;
+    line-height: 1.75rem;
+    color: $text-primary;
+}
+
+.noto500 {
+    font-family: NotoSans500, sans-serif;
+    font-size: 0.9375rem;
+    line-height: 1.75rem;
+    color: $text-primary;
+}
+
+.noto700 {
+    font-family: NotoSans700, sans-serif;
+    font-size: 2rem;
+    line-height: 2.75rem;
+    color: $text-primary;
+}
+
+.text-invert {
+    color: $text-invert;
+}
