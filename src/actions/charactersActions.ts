@@ -7,10 +7,10 @@ export const getAllCharactersPerPageAction = (payload: ICharactersModel) => ({
     payload
 });
 
-export const clearAllCharactersError = () => ({
+export const clearAllCharactersErrorAction = () => ({
     type: reduxConstants.CLEAR_ALL_CHARACTERS_ERROR
 });
 
-export const clearAllCharacters = () => ({
+export const clearAllCharactersAction = () => ({
     type: reduxConstants.CLEAR_ALL_CHARACTERS
 });

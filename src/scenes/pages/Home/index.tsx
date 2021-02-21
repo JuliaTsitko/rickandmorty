@@ -1,8 +1,9 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { ICharacter, IStore } from '../../../reducers/types';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import { ICharacter, IInfoCharacters, IStore } from '../../../reducers/types';
 import { bindActionCreators, Dispatch } from 'redux';
-import { getAllCharactersPerPageAction } from '../../../actions/charactersActions';
+import { clearAllCharactersAction, getAllCharactersPerPageAction } from '../../../actions/charactersActions';
 import { CharacterModel, CharactersModel, ICharacterModel, ICharactersModel } from '../../../api/models';
 import { getCharactersState } from '../../../reducers/characters';
 import CharacterCard from './components/CharacterCard';
@@ -16,6 +17,8 @@ interface IHome {
     results: Array<ICharacter> | null;
     clearCharacterInfo: () => void;
     character: ICharacter | null;
+    info: IInfoCharacters | null;
+    clearAllCharacters: () => void;
 }
 
 const Home: FunctionComponent<IHome> = ({
@@ -23,13 +26,33 @@ const Home: FunctionComponent<IHome> = ({
     getOneCharacter,
     results,
     clearCharacterInfo,
-    character
+    character,
+    info,
+    clearAllCharacters
 }) => {
+    const [page, setPage] = useState(1);
+    const [hasMore, setHasMore] = useState(true);
+
     useEffect(() => {
-        const model: ICharactersModel = new CharactersModel();
-        model.page = 1;
-        getAllCharactersPerPage(model);
+        clearAllCharacters();
+        fetchAllCharactersPerPage();
     }, []);
+
+    const fetchAllCharactersPerPage = () => {
+        const model: ICharactersModel = new CharactersModel();
+        model.page = page;
+        getAllCharactersPerPage(model);
+
+        if (info) {
+            if (page === info.pages && hasMore) {
+                setHasMore(false);
+            }
+
+            if (page < info.pages) {
+                setPage(page + 1);
+            }
+        }
+    };
 
     const onHandleClick = (id: number) => {
         if (character) {
@@ -40,37 +63,52 @@ const Home: FunctionComponent<IHome> = ({
         getOneCharacter(model);
     };
 
+    if (info === null || results === null) {
+        return null;
+    }
+
     return (
         <section className="home-section">
-            {
-                results && results.map((result: ICharacter) => {
-                    return (
-                        <CharacterCard
-                            src={result.image}
-                            alt={result.name}
-                            characterLink={routes.CHARACTER}
-                            name={result.name}
-                            status={result.status}
-                            species={result.species}
-                            id={result.id}
-                            onHandleClick={onHandleClick}
-                        />
-                    );
-                })
-            }
+            <InfiniteScroll
+                next={fetchAllCharactersPerPage}
+                hasMore={hasMore}
+                loader={() => {
+                    return <h3 className="noto700 alive">Loading...</h3>
+                }}
+                dataLength={results.length}
+            >
+                {
+                    results && results.map((result: ICharacter) => {
+                        return (
+                            <CharacterCard
+                                src={result.image}
+                                alt={result.name}
+                                characterLink={routes.CHARACTER}
+                                name={result.name}
+                                status={result.status}
+                                species={result.species}
+                                id={result.id}
+                                onHandleClick={onHandleClick}
+                            />
+                        );
+                    })
+                }
+            </InfiniteScroll>
         </section>
     );
 };
 
 const mapStateToProps = (store: IStore) => ({
     results: getCharactersState(store).results,
+    info: getCharactersState(store).info,
     character: getCharacterState(store).character
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
     getAllCharactersPerPage: bindActionCreators(getAllCharactersPerPageAction, dispatch),
     getOneCharacter: bindActionCreators(getOneCharacterAction, dispatch),
-    clearCharacterInfo: bindActionCreators(clearOneCharacterAction, dispatch)
+    clearCharacterInfo: bindActionCreators(clearOneCharacterAction, dispatch),
+    clearAllCharacters: bindActionCreators(clearAllCharactersAction, dispatch)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

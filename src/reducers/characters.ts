@@ -15,6 +15,11 @@ export default function charactersState(state = initialState, action: IActionSta
     const { type, payload } = action;
     switch (type) {
         case reduxConstants.GET_ALL_CHARACTERS_SUCCESS: {
+            const { results } = state;
+            if (results) {
+                const concatenated = results.concat(payload.results);
+                return { ...state, info: payload.info, results: concatenated };
+            }
             return { ...state, info: payload.info, results: payload.results };
         }
         case reduxConstants.CLEAR_ALL_CHARACTERS: {

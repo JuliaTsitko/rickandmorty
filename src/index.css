@@ -440,12 +440,15 @@ body,
 }
 
 .home-section {
+  padding-top: 50px;
+}
+
+.infinite-scroll-component {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
   max-width: 1920px;
-  padding-top: 50px;
 }
 
 .character-card {
