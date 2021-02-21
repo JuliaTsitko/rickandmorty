@@ -1,2 +1,2 @@
-export const HOME = '/';
-export const CHARACTER = '/character';
+export const HOME = '/rickandmorty';
+export const CHARACTER = '/rickandmorty/character';
