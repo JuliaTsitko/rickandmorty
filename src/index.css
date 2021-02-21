@@ -405,21 +405,27 @@ body,
 }
 
 .main {
-  margin-top: 200px;
-  min-height: calc(100vh - 200px);
+  margin-top: 100px;
+  min-height: calc(100vh - 100px);
   background-color: #060626;
 }
 
 .header {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   background-color: #FFFFFF;
+  height: 100px;
+  z-index: 1000;
+}
+.header .link-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 .header .link {
   padding: 0 3%;
@@ -428,15 +434,11 @@ body,
   color: #FFAB3D;
 }
 .header .title {
-  position: fixed;
-  top: 40px;
   width: 100%;
   text-align: center;
   font-size: 2.5rem;
   background-color: #FFFFFF;
   margin: 0;
-  padding: 1em 0;
-  padding-bottom: 1.9em;
 }
 
 .home-section {

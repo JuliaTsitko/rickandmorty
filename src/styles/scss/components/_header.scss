@@ -2,14 +2,21 @@
 
 .header {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     background-color: $text-invert;
+    height: 100px;
+    z-index: 1000;
+
+    .link-wrapper {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
 
     .link {
         padding: 0 3%;
@@ -19,14 +26,10 @@
     }
 
     .title {
-        position: fixed;
-        top: 40px;
         width: 100%;
         text-align: center;
         font-size: 2.5rem;
         background-color: $text-invert;
         margin: 0;
-        padding: 1em 0;
-        padding-bottom: 1.9em;
     }
 }
