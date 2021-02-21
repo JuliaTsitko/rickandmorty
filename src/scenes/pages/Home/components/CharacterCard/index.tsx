@@ -45,6 +45,7 @@ const CharacterCard: FunctionComponent<ICharacterCard> = ({
                 <section className="title">
                     <Link
                         to={characterLink}
+                        target="_blank"
                         className="link noto700"
                         onClick={onHandleClick ? () => onHandleClick(id) : undefined}
                     >

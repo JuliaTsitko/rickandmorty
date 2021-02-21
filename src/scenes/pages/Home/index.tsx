@@ -81,6 +81,7 @@ const Home: FunctionComponent<IHome> = ({
                     results && results.map((result: ICharacter) => {
                         return (
                             <CharacterCard
+                                key={result.id}
                                 src={result.image}
                                 alt={result.name}
                                 characterLink={routes.CHARACTER}
