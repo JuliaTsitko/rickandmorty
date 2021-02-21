@@ -6,6 +6,7 @@ export interface IActionState {
 export interface IStore {
     state: {
         charactersState: ICharacters;
+        characterState: ICharacterState;
     }
 }
 
@@ -14,6 +15,10 @@ export interface IInfoCharacters {
     next: string;
     pages: number;
     prev: string | null;
+}
+
+export interface ICharacterState {
+    character: ICharacter | null;
 }
 
 export interface ICharacter {
@@ -42,4 +47,3 @@ export interface ICharacters {
     results: Array<ICharacter> | null;
     error: any | null;
 }
-

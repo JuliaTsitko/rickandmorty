@@ -12,6 +12,7 @@ export function* getOneCharacter(action: ICharacterAction) {
     try {
         const { payload } = action;
         const { data } = yield call(api.getCharacter, payload);
+        console.log(data);
         yield put({
             type: reduxConstants.GET_ONE_CHARACTER_SUCCESS,
             payload: data
